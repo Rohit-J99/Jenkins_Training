@@ -50,12 +50,12 @@ pipeline {
         parallel {
             stage('build') {
             steps {
-                echo 'parallely building'
+                echo 'parallely building!'
             }
             }
             stage('test') {
             steps {
-                echo 'parallely testing'
+                echo 'parallely testing!'
             }
             }
         }

@@ -1,3 +1,42 @@
+// pipeline {
+//     agent any
+
+//     stages {
+//         stage('Build') {
+//             steps {
+//                 echo 'Building..'
+//             }
+//         }
+//         stage('parallel stages') {
+//         parallel (
+//             stage('build') {
+//             steps {
+//                 echo 'parallely building.'
+//             }
+//             }
+//             stage('test') {
+//             steps {
+//                 echo 'parallely testing.'
+//             }
+//             }
+//         )
+//         }
+  
+//         stage('Test') {
+//             steps {
+//                 echo 'Testing..'
+//             }
+//         }
+//         stage('Deploy') {
+//             steps {
+//                 echo 'Deploying....'
+//             }
+//         }
+//     }
+// }
+
+
+
 pipeline {
     agent any
 
@@ -8,7 +47,7 @@ pipeline {
             }
         }
         stage('parallel stages') {
-        parallel (
+        parallel {
             stage('build') {
             steps {
                 echo 'parallely building.'
@@ -16,10 +55,10 @@ pipeline {
             }
             stage('test') {
             steps {
-                echo 'parallely building.'
+                echo 'parallely testing.'
             }
             }
-        )
+        }
         }
   
         stage('Test') {

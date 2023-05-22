@@ -7,6 +7,21 @@ pipeline {
                 echo 'Building..'
             }
         }
+        stage('parallel stages') {
+        parallel (
+            stage('build') {
+            steps {
+                echo 'parallely building.'
+            }
+            }
+            stage('test') {
+            steps {
+                echo 'parallely building.'
+            }
+            }
+        )
+        }
+  
         stage('Test') {
             steps {
                 echo 'Testing..'

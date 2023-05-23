@@ -8,28 +8,28 @@
 //             }
 //         }
 //         stage('parallel stages') {
-//         parallel (
+//         parallel {
 //             stage('build') {
 //             steps {
-//                 echo 'parallely building.'
+//                 echo 'parallely building!'
 //             }
 //             }
 //             stage('test') {
 //             steps {
-//                 echo 'parallely testing.'
+//                 echo 'parallely testing!'
 //             }
 //             }
-//         )
+//         }
 //         }
   
 //         stage('Test') {
 //             steps {
-//                 echo 'Testing..'
+//                 echo 'Testing.....'
 //             }
 //         }
 //         stage('Deploy') {
 //             steps {
-//                 echo 'Deploying....'
+//                 echo 'Deploying.....'
 //             }
 //         }
 //     }
@@ -37,39 +37,58 @@
 
 
 
-pipeline {
-    agent any
 
+
+
+pipeline {
+
+    agent any
+    environment {
+        NEW_VERSION = '1.1.0'
+    }
+    
     stages {
-        stage('Build') {
+    
+        stage("build") {
+        
             steps {
-                echo 'Building..'
+                echo 'building the application...'
             }
         }
-        stage('parallel stages') {
-        parallel {
-            stage('build') {
+        
+        stage("test") {
+        
+            when {
+                expression {
+                    BRANCH_NAME = 'test' && NEW_VERSION >= '1.1.0'
+                }
+            }
             steps {
-                echo 'parallely building!'
-            }
-            }
-            stage('test') {
-            steps {
-                echo 'parallely testing!'
-            }
+                echo 'testing the application...'
             }
         }
-        }
-  
-        stage('Test') {
+        
+        stage("deploy") {
+
+             when {
+                expression {
+                    BRANCH_NAME = 'dev' || BRANCH_NAME = 'main'
+                }
+            }
+        
             steps {
-                echo 'Testing.....'
+                echo 'deploying the application...'
+                echo "deploying version ${NEW_VERSION}"
             }
         }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying.....'
-            }
+    } 
+    post {
+        success{
+            echo 'Build successful'
+        }
+        failure {
+            echo 'Build failed'
         }
     }
 }
+

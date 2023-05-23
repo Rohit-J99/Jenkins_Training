@@ -1,10 +1,23 @@
-pipeline {
-    agent any
 
+pipeline {
+
+    agent any
+    environment {
+        NEW_VERSION = '1.1.0'
+    }
+    
     stages {
-        stage('Build') {
+    
+        stage("build") {
+
+             when {
+                expression {
+                    BRANCH_NAME == 'main' && NEW_VERSION >= '1.1.0' 
+                }
+            }
+        
             steps {
-                echo 'Building..'
+                echo 'building the application...'
             }
         }
         stage('parallel stages') {
@@ -22,20 +35,30 @@ pipeline {
         }
         }
   
-        stage('Test') {
-
+        stage("test") {
+        
             when {
                 expression {
                     BRANCH_NAME == 'test' 
                 }
             }
             steps {
-                echo 'Testing.....'
+                echo 'testing the application...'
             }
         }
-        stage('Deploy') {
+
+        
+        stage("deploy") {
+
+             when {
+                expression {
+                    BRANCH_NAME == 'dev' || BRANCH_NAME == 'main'
+                }
+            }
+        
             steps {
-                echo 'Deploying.....'
+                echo 'deploying the application...'
+                echo "deploying version ${NEW_VERSION}"
             }
         }
     }

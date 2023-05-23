@@ -50,6 +50,12 @@ pipeline {
     stages {
     
         stage("build") {
+
+             when {
+                expression {
+                    BRANCH_NAME = 'main' && NEW_VERSION >= '1.1.0' 
+                }
+            }
         
             steps {
                 echo 'building the application...'
@@ -60,13 +66,14 @@ pipeline {
         
             when {
                 expression {
-                    BRANCH_NAME = 'test' && NEW_VERSION >= '1.1.0'
+                    BRANCH_NAME = 'test' 
                 }
             }
             steps {
                 echo 'testing the application...'
             }
         }
+
         
         stage("deploy") {
 

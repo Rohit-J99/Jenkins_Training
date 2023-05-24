@@ -4,6 +4,10 @@ pipeline {
     agent any
     environment {
         NEW_VERSION = '1.1.0'
+        ENV_1V=JENKINS_URL
+        ENV_2V=GIT_AUTHOR_NAME
+        ENV_3V=BRANCH_NAME
+    
     }
     
     stages {
@@ -61,6 +65,26 @@ pipeline {
                 echo "deploying version ${NEW_VERSION}"
             }
         }
+
+        stage("env1")
+        {
+            steps{
+                echo "jenkins URL: ${ENV_1V}"
+            }
+              
+        }
+        stage("env2")
+        {
+            steps{
+                echo "GIT Author Name: ${ENV_2V}"
+            }
+        }
+        stage("env3")
+        {
+            steps{
+                echo "Branch Name: ${ENV_3V}"
+            }
+        }
     }
         post {
         success{
@@ -74,65 +98,4 @@ pipeline {
 
 
 
-
-
-
-// pipeline {
-
-//     agent any
-//     environment {
-//         NEW_VERSION = '1.1.0'
-//     }
-    
-//     stages {
-    
-//         stage("build") {
-
-//              when {
-//                 expression {
-//                     BRANCH_NAME = 'main' && NEW_VERSION >= '1.1.0' 
-//                 }
-//             }
-        
-//             steps {
-//                 echo 'building the application...'
-//             }
-//         }
-        
-//         stage("test") {
-        
-//             when {
-//                 expression {
-//                     BRANCH_NAME = 'test' 
-//                 }
-//             }
-//             steps {
-//                 echo 'testing the application...'
-//             }
-//         }
-
-        
-//         stage("deploy") {
-
-//              when {
-//                 expression {
-//                     BRANCH_NAME = 'dev' || BRANCH_NAME = 'main'
-//                 }
-//             }
-        
-//             steps {
-//                 echo 'deploying the application...'
-//                 echo "deploying version ${NEW_VERSION}"
-//             }
-//         }
-//     } 
-//     post {
-//         success{
-//             echo 'Build successful'
-//         }
-//         failure {
-//             echo 'Build failed'
-//         }
-//     }
-// }
 

@@ -4,9 +4,9 @@ pipeline {
     agent any
     environment {
         NEW_VERSION = '1.1.0'
-        ENV_1V=JENKINS_URL
-        ENV_2V=GIT_AUTHOR_NAME
-        ENV_3V=BRANCH_NAME
+        // ENV_1V=${JENKINS_URL}
+        // ENV_2V=GIT_AUTHOR_NAME
+        // ENV_3V=BRANCH_NAME
     
     }
     
@@ -69,20 +69,20 @@ pipeline {
         stage("env1")
         {
             steps{
-                echo "jenkins URL: ${ENV_1V}"
+                echo "jenkins URL: ${JENKINS_URL}"
             }
               
         }
         stage("env2")
         {
             steps{
-                echo "GIT Author Name: ${ENV_2V}"
+                echo "GIT Author Name: ${GIT_AUTHOR_NAME}"
             }
         }
         stage("env3")
         {
             steps{
-                echo "Branch Name: ${ENV_3V}"
+                echo "Branch Name: ${BRANCH_NAME}"
             }
         }
     }

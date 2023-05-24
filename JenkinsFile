@@ -16,7 +16,14 @@ pipeline {
     stages {
         stage("Hello") {
             steps {
-                echo "Hel  lo ${params.PERSON}"
+                echo "Hello ${params.PERSON}"
+            }
+        }
+
+
+        stage("pythonScript") {
+            steps{
+                sh "python3 .\\scripts\\Demo.py"
             }
         }
 

@@ -73,12 +73,12 @@ pipeline {
             }
               
         }
-        stage("env2")
-        {
-            steps{
-                echo "GIT Author Name: ${GIT_AUTHOR_NAME}"
-            }
-        }
+        // stage("env2")
+        // {
+        //     steps{
+        //         echo "GIT Author Name: ${GIT_AUTHOR_NAME}"
+        //     }
+        // }
         stage("env3")
         {
             steps{

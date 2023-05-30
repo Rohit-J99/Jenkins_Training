@@ -3,7 +3,7 @@ pipeline {
 
     agent any
     parameters {
-    string(name: 'PERSON', defaultValue: 'Ro   hit', description: 'greet the person by his name', trim: true)
+    string(name: 'PERSON', defaultValue: 'Rohit', description: 'greet the person by his name', trim: true)
     }
     environment {
         NEW_VERSION = '1.1.0'

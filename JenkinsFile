@@ -24,6 +24,7 @@ pipeline {
         stage("pythonScript") {
             steps{
                 sh "python3 ./scripts/Demo.py"
+                echo "${PYTHONV}"
             }
         }
 

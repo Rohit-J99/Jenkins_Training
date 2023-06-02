@@ -8,7 +8,8 @@ parser.add_argument("--Arg2")
 Args=parser.parse_args()
 
 pythonV='the current version is 3.11'
-os.environ['pythonV'] = PYTHONV
+os.environ['PYTHONV'] = pythonV
+print(os.environ["PYTHONV"])
 print(os.environ["NEW_VERSION"])
 
 sub1=subprocess.run("opa test ./policies/policy1 -v",shell=True,capture_output=True,text=True)
